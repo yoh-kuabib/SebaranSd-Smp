@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peta - Website Sekolah  Di Kecamatan Kota Kefamenanu</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Website Sekolah Di Kecamatan Kota Kefamenanu</div>
+        <ul class="nav-links">
+            <li><a href="beranda.html">Beranda</a></li>
+            <li><a href="sekolah.html">Data Sekolah</a></li>
+            <li><a href="peta.html" class="active">Peta</a></li>
+            <li><a href="tentang.html">Tentang</a></li>
+        </ul>
+    </nav>
+
+    <div class="map-container">
+        <div class="map-header">
+            <h1>Peta Persebaran Sekolah Di Kecamatan Kota Kefamenanu</h1>
+            <div class="map-controls">
+                <input type="text" id="searchLocation" placeholder="Temukan sekolah atau lokasi..." class="map-search">
+                <button id="searchBtn" class="search-btn">Cari</button>
+            </div>
+        </div>
+
+        <div class="map-wrapper">
+            <div class="map-sidebar">
+                <div class="legend">
+                    <h3>Legenda</h3>
+                    <div class="legend-item">
+                        <span class="legend-marker sd-marker"></span>
+                        <span>Sekolah Dasar (SD)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker smp-marker"></span>
+                        <span>Sekolah Menengah Pertama (SMP)</span>
+                    </div>
+                </div>
+
+                <div class="filter-panel">
+                    <h3>Filter Tampilan</h3>
+                    <div class="filter-group">
+                        <label>
+                            <input type="checkbox" id="showSD" checked> Tampilkan SD
+                        </label>
+                        <label>
+                            <input type="checkbox" id="showSMP" checked> Tampilkan SMP
+                        </label>
+                    </div>
+
+                    <div class="kelurahan-filter">
+                        <h4>Filter Kelurahan</h4>
+                        <label><input type="checkbox" class="kelurahan-checkbox" value="Kefamenanu" checked> Kefamenanu</label>
+                        <label><input type="checkbox" class="kelurahan-checkbox" value="Sasi" checked> Sasi</label>
+                        <label><input type="checkbox" class="kelurahan-checkbox" value="Aplasi" checked> Aplasi</label>
+                        <label><input type="checkbox" class="kelurahan-checkbox" value="Maubeli" checked> Maubeli</label>
+                    </div>
+                </div>
+
+                <div class="school-list" id="schoolList">
+                    <h3>Daftar Sekolah</h3>
+                    <div id="listContainer"></div>
+                </div>
+            </div>
+
+            <div id="map" class="map-display"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Persebaran SD dan SMP Di Kecamatan Kota Kefamenanu. WEBSITE KELOMPOK 3</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script>
+        // Initialize the map centered on Kefamenanu
+        const map = L.map('map').setView([-9.4456, 124.4736], 13);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        
+
+        // School data with coordinates
+        const schoolsData = {
+            SD: [
+                { nama: "SD Negeri 1 Kefamenanu", kelurahan: "Kefamenanu", lat: -9.4456, lng: 124.4736, siswa: 250, status: "Negeri" },
+                { nama: "SD Negeri 2 Kefamenanu", kelurahan: "Kefamenanu", lat: -9.4467, lng: 124.4725, siswa: 180, status: "Negeri" },
+                { nama: "SD Katolik Santa Maria", kelurahan: "Sasi", lat: -9.4445, lng: 124.4789, siswa: 160, status: "Swasta" },
+                { nama: "SD Negeri Sasi", kelurahan: "Sasi", lat: -9.4434, lng: 124.4798, siswa: 140, status: "Negeri" },
+                { nama: "SD Negeri Aplasi", kelurahan: "Aplasi", lat: -9.4478, lng: 124.4812, siswa: 120, status: "Negeri" },
+                { nama: "SD Kristen Aplasi", kelurahan: "Aplasi", lat: -9.4489, lng: 124.4823, siswa: 95, status: "Swasta" },
+                { nama: "SD Negeri Maubeli", kelurahan: "Maubeli", lat: -9.4412, lng: 124.4698, siswa: 110, status: "Negeri" }
+            ],
+            SMP: [
+                { nama: "SMP Negeri 1 Kefamenanu", kelurahan: "Kefamenanu", lat: -9.4445, lng: 124.4756, siswa: 420, status: "Negeri" },
+                { nama: "SMP Negeri 2 Kefamenanu", kelurahan: "Kefamenanu", lat: -9.4478, lng: 124.4712, siswa: 380, status: "Negeri" },
+                { nama: "SMP Katolik Virgo Fidelis", kelurahan: "Sasi", lat: -9.4423, lng: 124.4805, siswa: 280, status: "Swasta" },
+                { nama: "SMP Kristen Kefamenanu", kelurahan: "Kefamenanu", lat: -9.4467, lng: 124.4745, siswa: 240, status: "Swasta" },
+                { nama: "SMP Negeri Sasi", kelurahan: "Sasi", lat: -9.4456, lng: 124.4789, siswa: 220, status: "Negeri" },
+                { nama: "SMP Swasta Maubeli", kelurahan: "Maubeli", lat: -9.4401, lng: 124.4678, siswa: 150, status: "Swasta" }
+            ]
+        };
+
+        let markers = [];
+
+        // Custom marker icons
+    const sdIcon = L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    const smpIcon = L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+        function addSchoolMarkers() {
+            // Clear existing markers
+            markers.forEach(marker => map.removeLayer(marker));
+            markers = [];
+
+            // Add SD markers
+            if (document.getElementById('showSD').checked) {
+                schoolsData.SD.forEach(school => {
+                    if (isKelurahanVisible(school.kelurahan)) {
+                        const marker = L.marker([school.lat, school.lng], { icon: sdIcon })
+                            .bindPopup(`
+                                <div class="popup-content">
+                                    <h4>${school.nama}</h4>
+                                    <p><strong>Jenis:</strong> Sekolah Dasar</p>
+                                    <p><strong>Status:</strong> ${school.status}</p>
+                                    <p><strong>Kelurahan:</strong> ${school.kelurahan}</p>
+                                    <p><strong>Jumlah Siswa:</strong> ${school.siswa} siswa</p>
+                                </div>
+                            `)
+                            .addTo(map);
+                        markers.push(marker);
+                    }
+                });
+            }
+
+            // Add SMP markers
+            if (document.getElementById('showSMP').checked) {
+                schoolsData.SMP.forEach(school => {
+                    if (isKelurahanVisible(school.kelurahan)) {
+                        const marker = L.marker([school.lat, school.lng], { icon: smpIcon })
+                            .bindPopup(`
+                                <div class="popup-content">
+                                    <h4>${school.nama}</h4>
+                                    <p><strong>Jenis:</strong> Sekolah Menengah Pertama</p>
+                                    <p><strong>Status:</strong> ${school.status}</p>
+                                    <p><strong>Kelurahan:</strong> ${school.kelurahan}</p>
+                                    <p><strong>Jumlah Siswa:</strong> ${school.siswa} siswa</p>
+                                </div>
+                            `)
+                            .addTo(map);
+                        markers.push(marker);
+                    }
+                });
+            }
+
+            updateSchoolList();
+        }
+
+        function isKelurahanVisible(kelurahan) {
+            const checkbox = document.querySelector(`.kelurahan-checkbox[value="${kelurahan}"]`);
+            return checkbox && checkbox.checked;
+        }
+
+        function updateSchoolList() {
+            const listContainer = document.getElementById('listContainer');
+            listContainer.innerHTML = '';
+
+            let allSchools = [];
+            
+            if (document.getElementById('showSD').checked) {
+                schoolsData.SD.forEach(school => {
+                    if (isKelurahanVisible(school.kelurahan)) {
+                        allSchools.push({...school, jenis: 'SD'});
+                    }
+                });
+            }
+
+            if (document.getElementById('showSMP').checked) {
+                schoolsData.SMP.forEach(school => {
+                    if (isKelurahanVisible(school.kelurahan)) {
+                        allSchools.push({...school, jenis: 'SMP'});
+                    }
+                });
+            }
+
+            allSchools.forEach(school => {
+                const schoolItem = document.createElement('div');
+                schoolItem.className = 'school-list-item';
+                schoolItem.innerHTML = `
+                    <div class="school-name">${school.nama}</div>
+                    <div class="school-type">${school.jenis} ${school.status}</div>
+                    <div class="school-location">${school.kelurahan}</div>
+                `;
+                schoolItem.addEventListener('click', () => {
+                    map.setView([school.lat, school.lng], 16);
+                    // Find and open the popup for this school
+                    markers.forEach(marker => {
+                        const popup = marker.getPopup();
+                        if (popup && popup.getContent().includes(school.nama)) {
+                            marker.openPopup();
+                        }
+                    });
+                });
+                listContainer.appendChild(schoolItem);
+            });
+        }
+
+        function searchLocation() {
+            const searchTerm = document.getElementById('searchLocation').value.toLowerCase();
+            let found = false;
+
+            // Search in SD
+            schoolsData.SD.forEach(school => {
+                if (school.nama.toLowerCase().includes(searchTerm) || 
+                    school.kelurahan.toLowerCase().includes(searchTerm)) {
+                    map.setView([school.lat, school.lng], 16);
+                    found = true;
+                }
+            });
+
+            // Search in SMP if not found in SD
+            if (!found) {
+                schoolsData.SMP.forEach(school => {
+                    if (school.nama.toLowerCase().includes(searchTerm) || 
+                        school.kelurahan.toLowerCase().includes(searchTerm)) {
+                        map.setView([school.lat, school.lng], 16);
+                        found = true;
+                    }
+                });
+            }
+
+            if (!found) {
+                alert('Lokasi tidak ditemukan. Silakan coba dengan kata kunci lain.');
+            }
+        }
+
+        // Initialize map
+        addSchoolMarkers();
+
+        // Event listeners
+        document.getElementById('showSD').addEventListener('change', addSchoolMarkers);
+        document.getElementById('showSMP').addEventListener('change', addSchoolMarkers);
+        document.querySelectorAll('.kelurahan-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', addSchoolMarkers);
+        });
+        document.getElementById('searchBtn').addEventListener('click', searchLocation);
+        document.getElementById('searchLocation').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchLocation();
+            }
+        });
+    </script>
+</body>
+</html>

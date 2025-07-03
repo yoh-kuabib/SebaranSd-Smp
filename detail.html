@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detail Sekolah</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    h1 {
+      color: #5a00cc;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .school-image {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 25px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    strong {
+      color: #000;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img id="schoolImage" class="school-image" src="img/default.jpg" alt="Foto Sekolah" onerror="this.src='img/default.jpg';" />
+    <h1 id="schoolName">Nama Sekolah</h1>
+    <div id="schoolDetail">
+      <p>Loading...</p>
+    </div>
+    <a href="sekolah.html" class="back-link">&larr; Kembali ke Data Sekolah</a>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const namaSekolah = urlParams.get("nama");
+
+    // Data sekolah
+    const allSchools = [
+  {
+    nama: "SD Katolik Kefamenanu 1",
+    kelurahan: "Aplasi",
+    alamat: "Kota Kefamenanu ",
+    siswa: 314,
+    kelas: 13,
+    status: "Swasta",
+    gambar: "img/SD1.jpeg",
+    npsn: "50301083",
+    akreditasi: "B",
+    kepala_sekolah: "Ibu Agusta Mathilda Suni",
+    tahun_berdiri: 1973,
+    fasilitas: ["Perpustakaan", "Lab Komputer", "Lapangan"],
+    jumlah_guru: 12
+  },
+  {
+    nama: "SD GMIT 2 Kefamenanu",
+    kelurahan: "Kefamenanu Tengah",
+    alamat: "Jl. Patimura",
+    siswa: 153,
+    kelas: 10,
+    status: "Negeri",
+    gambar: "img/gmit.jpg",
+    npsn: "50301096",
+    akreditasi: "B",
+    kepala_sekolah: "Ibu Marlyn Bertha Yeniosa Henukh",
+    tahun_berdiri: 2013,
+    fasilitas: ["Perpustakaan", "Lapangan"],
+    jumlah_guru: 10
+  },
+  {
+    nama: "SD Katolik Santa. Rita de Casia",
+    kelurahan: "Sasi",
+    alamat: "Jl. El Tari",
+    siswa: 248,
+    kelas: 6,
+    status: "Swasta",
+    gambar: "img/rita casia.jpeg",
+    npsn: "50307340",
+    akreditasi: "B",
+    kepala_sekolah: "Ibu Margaretha Bano Klau",
+    tahun_berdiri: 2007,
+    fasilitas: ["Perpustakaan", "Ruang Musik"],
+    jumlah_guru: 9
+  },
+  {
+    nama: "SD Negeri Sasi",
+    kelurahan: "Sasi",
+    alamat: "Sasi",
+    siswa: 444,
+    kelas: 20,
+    status: "Negeri",
+    gambar: "img/negerisasi.jpg",
+    npsn: "	50301027",
+    akreditasi: "B",
+    kepala_sekolah: "Bapak Landelinus Nesi",
+    tahun_berdiri: 1970,
+    fasilitas: ["Perpustakaan"],
+    jumlah_guru: 27
+  },
+  {
+    nama: "SD Negeri Gua Aplasi",
+    kelurahan: "Aplasi",
+    alamat: "Aplasi",
+    siswa: 162,
+    kelas: 7,
+    status: "Negeri",
+    gambar: "img/gua.jpeg",
+    npsn: "50300955",
+    akreditasi: "B",
+    kepala_sekolah: "Ibu Maria Yosefina Lika Bau",
+    tahun_berdiri: 1970,
+    fasilitas: ["Lapangan"],
+    jumlah_guru: 11
+  },
+  {
+    nama: "SD Katolik Leob",
+    kelurahan: "Benpasi",
+    alamat: "Jln. Basuki Rahmat",
+    siswa: 683,
+    kelas: 22,
+    status: "Swasta",
+    gambar: "img/leob.jpg",
+    npsn: "50301133",
+    akreditasi: "A",
+    kepala_sekolah: "Ema Thabita Nenoliu",
+    tahun_berdiri: 1967,
+    fasilitas: ["Perpustakaan"],
+    jumlah_guru: 28
+  },
+  {
+    nama: "SD Negeri Maubeli",
+    kelurahan: "Maubeli",
+    alamat: "Jl. Banaob",
+    siswa: 226,
+    kelas: 7,
+    status: "Negeri",
+    gambar: "img/maubeli.jpg",
+    npsn: "50300927",
+    akreditasi: "B",
+    kepala_sekolah: "Ibu Margaretha Banu",
+    tahun_berdiri: 2013,
+    fasilitas: ["Lapangan", "Ruang Komputer"],
+    jumlah_guru: 17
+  },
+  {
+    nama: "SMP Negeri 1 Kefamenanu",
+    kelurahan: "Kefamenanu",
+    alamat: "Jl. Basuki Rahmat",
+    siswa: 792,
+    kelas: 15,
+    status: "Negeri",
+    gambar: "img/smp1kefa.jpg",
+    npsn: "50300991",
+    akreditasi: "A",
+    kepala_sekolah: "Bapak Viktor Subani",
+    tahun_berdiri: 1978,
+    fasilitas: ["Perpustakaan", "Lab Komputer", "Lapangan Basket"],
+    jumlah_guru: 65
+  },
+  {
+    nama: "SMP Negeri 2 Kefamenanu",
+    kelurahan: "Bansone",
+    alamat: "Jl. Diponegoro",
+    siswa: 198,
+    kelas: 14,
+    status: "Negeri",
+    gambar: "img/smpn2.jpg",
+    npsn: "50300989",
+    akreditasi: "B",
+    kepala_sekolah: "Ibu Ni Ketut Asribudi",
+    tahun_berdiri: 2017,
+    fasilitas: ["Lab IPA", "Lapangan", "Perpustakaan"],
+    jumlah_guru: 25
+  },
+  {
+    nama: "SMP Katolik Virgo Fidelis",
+    kelurahan: "Sasi",
+    alamat: "Jl. Ahmad Yani No. 29",
+    siswa: 520,
+    kelas: 16,
+    status: "Swasta",
+    gambar: "img/smpvirgo.jpg",
+    npsn: "50302261",
+    akreditasi: "A",
+    kepala_sekolah: "Ibu Maria Tatiana Erti",
+    tahun_berdiri: 1977,
+    fasilitas: ["Kapel", "Perpustakaan"],
+    jumlah_guru: 15
+  },
+  {
+    nama: "SMP Kristen Kefamenanu",
+    kelurahan: "Kefamenanu Selatan",
+    alamat: "Jln. El - Tari",
+    siswa: 271,
+    kelas: 14,
+    status: "Swasta",
+    gambar: "img/smpkristen.jpg",
+    npsn: "50301019",
+    akreditasi: "B",
+    kepala_sekolah: "Bapak Paulus Adolf Gustaf Maf",
+    tahun_berdiri: 1958,
+    fasilitas: ["Perpustakaan"],
+    jumlah_guru: 20
+  },
+  {
+    nama: "SMPK St. Antonius Padua Sasi",
+    kelurahan: "Sasi",
+    alamat: "Jln. El-tari Km 7",
+    siswa: 476,
+    kelas: 15,
+    status: "Swasta",
+    gambar: "img/smpsasi.jpg",
+    npsn: "50301018",
+    akreditasi: "A",
+    kepala_sekolah: "Fx. Ruruh Wardani Murtiningsih",
+    tahun_berdiri: 2002,
+    fasilitas: ["Lapangan", "Perpustakaan"],
+    jumlah_guru: 26
+  },
+  {
+    nama: "SMP Negeri Maubeli",
+    kelurahan: "Maubeli",
+    alamat: "JL. BANAOB",
+    siswa: 164,
+    kelas: 7,
+    status: "Negeri",
+    gambar: "img/smpmaubeli.jpg",
+    npsn: "69894306",
+    akreditasi: "C",
+    kepala_sekolah: "Ibu Maria Seo Teme",
+    tahun_berdiri: 2013,
+    fasilitas: ["Lapangan"],
+    jumlah_guru: 15
+  }
+];
+
+
+    // Cari sekolah berdasarkan nama dari URL
+    const school = allSchools.find(s => s.nama === namaSekolah);
+
+   if (school) {
+  document.getElementById("schoolName").innerText = school.nama;
+  document.getElementById("schoolImage").src = school.gambar || "img/default.jpg";
+
+  const fasilitasList = school.fasilitas && school.fasilitas.length > 0
+    ? `<ul class="facility-list">` + school.fasilitas.map(f => `<li>${f}</li>`).join('') + `</ul>`
+    : "<p>Tidak ada fasilitas yang tercatat.</p>";
+
+  document.getElementById("schoolDetail").innerHTML = `
+    <p><strong>Kelurahan:</strong> ${school.kelurahan}</p>
+    <p><strong>Alamat:</strong> ${school.alamat}</p>
+    <p><strong>Jumlah Siswa:</strong> ${school.siswa} siswa</p>
+    <p><strong>Jumlah Kelas:</strong> ${school.kelas} kelas</p>
+    <p><strong>Status:</strong> ${school.status}</p>
+    <p><strong>NPSN:</strong> ${school.npsn || '-'}</p>
+    <p><strong>Akreditasi:</strong> ${school.akreditasi || '-'}</p>
+    <p><strong>Kepala Sekolah:</strong> ${school.kepala_sekolah || '-'}</p>
+    <p><strong>Tahun Berdiri:</strong> ${school.tahun_berdiri || '-'}</p>
+    <p><strong>Jumlah Guru:</strong> ${school.jumlah_guru || '-'}</p>
+    <p><strong>Fasilitas:</strong></p>
+    ${fasilitasList}
+  `;
+} else {
+  document.getElementById("schoolDetail").innerHTML = `<p>Data tidak ditemukan.</p>`;
+}
+
+  </script>
+</body>
+</html>

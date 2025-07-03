@@ -1,0 +1,248 @@
+[
+  {
+    "nama": "SD Negeri 1 Kefamenanu",
+    "kelurahan": "Kefamenanu",
+    "alamat": "Jl. Timor Raya No. 1",
+    "siswa": 250,
+    "kelas": 12,
+    "status": "Negeri",
+    "gambar": "img/SD1.jpeg",
+    "npsn": "30208638",
+    "akreditasi": "A",
+    "kepala_sekolah": "Ibu Maria Yuni, S.Pd",
+    "tahun_berdiri": 1998,
+    "fasilitas": [
+      "Perpustakaan",
+      "Lab Komputer",
+      "Lapangan"
+    ],
+    "jumlah_guru": 12,
+    "website": "https://sdn1kefamenanu.sch.id"
+  },
+  {
+    "nama": "SD Negeri 2 Kefamenanu",
+    "kelurahan": "Kefamenanu",
+    "alamat": "Jl. Sudirman No. 45",
+    "siswa": 180,
+    "kelas": 10,
+    "status": "Negeri",
+    "gambar": "img/SD2.jpeg",
+    "npsn": "30208639",
+    "akreditasi": "B",
+    "kepala_sekolah": "Ibu Ana P. Leki, S.Pd",
+    "tahun_berdiri": 1996,
+    "fasilitas": [
+      "Perpustakaan",
+      "Lapangan"
+    ],
+    "jumlah_guru": 10,
+    "website": "https://sdn2kefamenanu.sch.id"
+  },
+  {
+    "nama": "SD Katolik Santa Maria",
+    "kelurahan": "Sasi",
+    "alamat": "Jl. Gereja No. 12",
+    "siswa": 160,
+    "kelas": 9,
+    "status": "Swasta",
+    "gambar": "img/santamaria.jpg",
+    "npsn": "30208650",
+    "akreditasi": "A",
+    "kepala_sekolah": "Ibu Yosefa Tasi, S.Pd",
+    "tahun_berdiri": 1990,
+    "fasilitas": [
+      "Perpustakaan",
+      "Ruang Musik"
+    ],
+    "jumlah_guru": 8,
+    "website": "-"
+  },
+  {
+    "nama": "SD Negeri Sasi",
+    "kelurahan": "Sasi",
+    "alamat": "Jl. Pendidikan No. 5",
+    "siswa": 140,
+    "kelas": 8,
+    "status": "Negeri",
+    "gambar": "img/sdsasi.jpg",
+    "npsn": "30208651",
+    "akreditasi": "B",
+    "kepala_sekolah": "Bapak David Leto, S.Pd",
+    "tahun_berdiri": 1994,
+    "fasilitas": [
+      "Perpustakaan"
+    ],
+    "jumlah_guru": 9,
+    "website": "-"
+  },
+  {
+    "nama": "SD Negeri Aplasi",
+    "kelurahan": "Aplasi",
+    "alamat": "Jl. Aplasi Raya No. 8",
+    "siswa": 130,
+    "kelas": 7,
+    "status": "Negeri",
+    "gambar": "img/sdaplasi.jpg",
+    "npsn": "30208652",
+    "akreditasi": "B",
+    "kepala_sekolah": "Ibu Kristina Nenobais, S.Pd",
+    "tahun_berdiri": 1993,
+    "fasilitas": [
+      "Lapangan"
+    ],
+    "jumlah_guru": 7,
+    "website": "-"
+  },
+  {
+    "nama": "SD Kristen Aplasi",
+    "kelurahan": "Aplasi",
+    "alamat": "Jl. Pelita No. 3",
+    "siswa": 120,
+    "kelas": 6,
+    "status": "Swasta",
+    "gambar": "img/sdkristenaplasi.jpg",
+    "npsn": "30208653",
+    "akreditasi": "C",
+    "kepala_sekolah": "Ibu Melda Tefa, S.Th",
+    "tahun_berdiri": 1991,
+    "fasilitas": [
+      "Perpustakaan"
+    ],
+    "jumlah_guru": 6,
+    "website": "-"
+  },
+  {
+    "nama": "SD Negeri Maubeli",
+    "kelurahan": "Maubeli",
+    "alamat": "Jl. Pendidikan No. 10",
+    "siswa": 150,
+    "kelas": 7,
+    "status": "Negeri",
+    "gambar": "img/sdmaubeli.jpg",
+    "npsn": "30208654",
+    "akreditasi": "B",
+    "kepala_sekolah": "Bapak Yan Nino, S.Pd",
+    "tahun_berdiri": 1992,
+    "fasilitas": [
+      "Lapangan",
+      "Ruang Komputer"
+    ],
+    "jumlah_guru": 8,
+    "website": "-"
+  },
+  {
+    "nama": "SMP Negeri 1 Kefamenanu",
+    "kelurahan": "Kefamenanu",
+    "alamat": "Jl. Timor Raya No. 15",
+    "siswa": 420,
+    "kelas": 15,
+    "status": "Negeri",
+    "gambar": "img/smp1.jpg",
+    "npsn": "30208640",
+    "akreditasi": "A",
+    "kepala_sekolah": "Bapak Yohanis Nuban, M.Pd",
+    "tahun_berdiri": 1995,
+    "fasilitas": [
+      "Perpustakaan",
+      "Ruang Keterampilan",
+      "Lapangan Basket"
+    ],
+    "jumlah_guru": 18,
+    "website": "https://smpn1kefamenanu.sch.id"
+  },
+  {
+    "nama": "SMP Negeri 2 Kefamenanu",
+    "kelurahan": "Kefamenanu",
+    "alamat": "Jl. Soeharto No. 22",
+    "siswa": 380,
+    "kelas": 13,
+    "status": "Negeri",
+    "gambar": "img/smp2.jpg",
+    "npsn": "30208641",
+    "akreditasi": "B",
+    "kepala_sekolah": "Ibu Rosalia Taek, M.Pd",
+    "tahun_berdiri": 1996,
+    "fasilitas": [
+      "Lab IPA",
+      "Lapangan",
+      "Perpustakaan"
+    ],
+    "jumlah_guru": 15,
+    "website": "-"
+  },
+  {
+    "nama": "SMP Katolik Virgo Fidelis",
+    "kelurahan": "Sasi",
+    "alamat": "Jl. Gereja No. 25",
+    "siswa": 280,
+    "kelas": 9,
+    "status": "Swasta",
+    "gambar": "img/smpvirgo.jpg",
+    "npsn": "30208642",
+    "akreditasi": "A",
+    "kepala_sekolah": "Suster Maria Cinta, S.Pd",
+    "tahun_berdiri": 1990,
+    "fasilitas": [
+      "Kapel",
+      "Perpustakaan"
+    ],
+    "jumlah_guru": 12,
+    "website": "-"
+  },
+  {
+    "nama": "SMP Kristen Kefamenanu",
+    "kelurahan": "Kefamenanu",
+    "alamat": "Jl. Yohanes No. 5",
+    "siswa": 260,
+    "kelas": 10,
+    "status": "Swasta",
+    "gambar": "img/smpkristen.jpg",
+    "npsn": "30208643",
+    "akreditasi": "B",
+    "kepala_sekolah": "Bapak Kornelius Leo, S.Th",
+    "tahun_berdiri": 1992,
+    "fasilitas": [
+      "Perpustakaan",
+      "Ruang Musik"
+    ],
+    "jumlah_guru": 11,
+    "website": "-"
+  },
+  {
+    "nama": "SMP Negeri Sasi",
+    "kelurahan": "Sasi",
+    "alamat": "Jl. Pendidikan No. 9",
+    "siswa": 210,
+    "kelas": 8,
+    "status": "Negeri",
+    "gambar": "img/smpsasi.jpg",
+    "npsn": "30208644",
+    "akreditasi": "B",
+    "kepala_sekolah": "Ibu Lidia Sonbay, S.Pd",
+    "tahun_berdiri": 1993,
+    "fasilitas": [
+      "Lapangan",
+      "Perpustakaan"
+    ],
+    "jumlah_guru": 10,
+    "website": "-"
+  },
+  {
+    "nama": "SMP Swasta Maubeli",
+    "kelurahan": "Maubeli",
+    "alamat": "Jl. Maubeli Raya No. 7",
+    "siswa": 190,
+    "kelas": 7,
+    "status": "Swasta",
+    "gambar": "img/smpswastamaubeli.jpg",
+    "npsn": "30208645",
+    "akreditasi": "C",
+    "kepala_sekolah": "Bapak Anton Banunaek, S.Pd",
+    "tahun_berdiri": 1994,
+    "fasilitas": [
+      "Lapangan"
+    ],
+    "jumlah_guru": 9,
+    "website": "-"
+  }
+]

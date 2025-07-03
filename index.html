@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Sekolah Di Kecamatan Kota Kefamenanu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Website Sekolah Di Kecamatan Kota Kefamenanu</div>
+        <ul class="nav-links">
+            <li><a href="beranda.html">Beranda</a></li>
+            <li><a href="sekolah.html">Data Sekolah</a></li>
+            <li><a href="peta.html">Peta</a></li>
+            <li><a href="tentang.html">Tentang</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Selamat Datang di Website Sekolah Di Kecamatan Kota Kefamenanu</h1>
+            <p>Jelajahi persebaran SD dan SMP di Kecamatan Kota Kefamenanu melalui peta interaktif kami.</p>
+            <a href="peta.html" class="cta-button">Lihat Peta</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="intro-section">
+            <h2>Tentang Sistem Informasi Geografis Sekolah</h2>
+            <p>Sistem ini menyediakan informasi lengkap tentang lokasi dan data sekolah dasar (SD) dan sekolah menengah pertama (SMP) yang tersebar di Kecamatan Kota Kefamenanu, Kabupaten Timor Tengah Utara.</p>
+        </section>
+
+        <section class="features">
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏫</div>
+                    <h3>Data Sekolah Lengkap</h3>
+                    <p>Informasi detail tentang SD dan SMP di Kecamatan Kota Kefamenanu</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3>Peta Interaktif</h3>
+                    <p>Visualisasi lokasi sekolah dengan peta yang mudah digunakan</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Analisis Persebaran</h3>
+                    <p>Analisis geografis persebaran sekolah di wilayah kecamatan</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Persebaran SD dan SMP Di Kecamatan Kota Kefamenanu. WEBSITE KELOMPOK 3</p>
+        </div>
+    </footer>
+
+    <script>
+        // Redirect to beranda.html after 3 seconds if no interaction
+        setTimeout(() => {
+            if (!document.querySelector('.cta-button:hover')) {
+                window.location.href = 'beranda.html';
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

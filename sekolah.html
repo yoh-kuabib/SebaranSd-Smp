@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Sekolah - Website Sekolah Di Kecamatan Kota Kefamenanu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Website Sekolah Di Kecamatan Kota Kefamenanu</div>
+        <ul class="nav-links">
+            <li><a href="beranda.html">Beranda</a></li>
+            <li><a href="sekolah.html" class="active">Data Sekolah</a></li>
+            <li><a href="peta.html">Peta</a></li>
+            <li><a href="tentang.html">Tentang</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Data Sekolah Di Kecamatan Kota Kefamenanu</h1>
+            <p>Informasi lengkap tentang sekolah dasar dan menengah pertama di wilayah Kefamenanu</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="filter-section">
+            <div class="filter-controls">
+                <select id="jenisSekolah" class="filter-select">
+                    <option value="semua">Semua Jenis Sekolah</option>
+                    <option value="SD">Sekolah Dasar (SD)</option>
+                    <option value="SMP">Sekolah Menengah Pertama (SMP)</option>
+                </select>
+                <select id="kelurahan" class="filter-select">
+                    <option value="semua">Semua Kelurahan</option>
+                    <option value="Sasi">Kelurahan Sasi</option>
+                    <option value="Aplasi">Kelurahan Aplasi</option>
+                    <option value="Maubeli">Kelurahan Maubeli</option>
+                    <option value="Kefamenanu">Kelurahan Kefamenanu</option>
+                </select>
+                <input type="text" id="searchInput" placeholder="Cari nama sekolah..." class="search-input">
+                <button onclick="resetFilter()" class="reset-btn">Reset</button>
+            </div>
+        </div>
+
+        <div class="schools-section">
+            <div class="section-tabs">
+                <button class="tab-btn active" onclick="showTab('sd')">Sekolah Dasar</button>
+                <button class="tab-btn" onclick="showTab('smp')">Sekolah Menengah Pertama</button>
+            </div>
+
+            <div id="sd-content" class="tab-content active">
+                <h2>Daftar Sekolah Dasar (SD)</h2>
+                <div class="schools-grid" id="sd-grid">
+                    <!-- SD data will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div id="smp-content" class="tab-content">
+                <h2>Daftar Sekolah Menengah Pertama (SMP)</h2>
+                <div class="schools-grid" id="smp-grid">
+                    <!-- SMP data will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Persebaran SD dan SMP Di Kecamatan Kota Kefamenanu. WEBSITE KELOMPOK 3</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample data for schools
+        const schoolsData = {
+            SD: [
+                { nama: "SD Katolik Kefamenanu 1", kelurahan: "Aplasi", alamat: "Kota Kefamenanu", siswa: 314, kelas: 13, status: "Swasta" },
+                { nama: "SD GMIT 2 Kefamenanu", kelurahan: "Kefamenanu", alamat: "Jl. Sudirman No. 45", siswa: 180, kelas: 10, status: "Negeri" },
+                { nama: "SD Katolik Santa. Rita de Casia", kelurahan: "Sasi", alamat: "Jl. El Tari", siswa: 248, kelas: 6, status: "Swasta" },
+                { nama: "SD Negeri Sasi", kelurahan: "Sasi", alamat: "Sasi", siswa: 444, kelas: 20, status: "Negeri" },
+                { nama: "SD Negeri Gua Aplasi", kelurahan: "Aplasi", alamat: "Aplasi", siswa: 162, kelas: 7, status: "Negeri" },
+                { nama: "SD Katolik Leob", kelurahan: "Benpasi", alamat: "Jl. Basuki Rahmat", siswa: 683, kelas: 22, status: "Swasta" },
+                { nama: "SD Negeri Maubeli", kelurahan: "Maubeli", alamat: "Jl. Banaob", siswa: 226, kelas: 7, status: "Negeri" }
+            ],
+            SMP: [
+                { nama: "SMP Negeri 1 Kefamenanu", kelurahan: "Kefamenanu", alamat: "Jl. Basuki Rahmat", siswa: 792, kelas: 15, status: "Negeri" },
+                { nama: "SMP Negeri 2 Kefamenanu", kelurahan: "Bansone", alamat: "Jl. Diponegoro", siswa: 198, kelas: 14, status: "Negeri" },
+                { nama: "SMP Katolik Virgo Fidelis", kelurahan: "Sasi", alamat: "Jl. Ahmad Yani No. 29", siswa: 520, kelas: 16, status: "Swasta" },
+                { nama: "SMP Kristen Kefamenanu", kelurahan: "Kefamenanu Selatan", alamat: "Jln. El - Tari", siswa: 271, kelas: 14, status: "Swasta" },
+                { nama: "SMPK St. Antonius Padua Sasi", kelurahan: "Sasi", alamat: "Jln. El-tari Km 7", siswa: 476, kelas: 15, status: "Swasta" },
+                { nama: "SMP Negeri Maubeli", kelurahan: "Maubeli", alamat: "JL. BANAOB", siswa: 164, kelas: 7, status: "Negeri" }
+            ]
+        };
+
+        function renderSchools(schools, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+
+            schools.forEach(school => {
+                const schoolCard = document.createElement('div');
+                schoolCard.className = 'school-detail-card';
+                schoolCard.innerHTML = `
+                    <div class="school-header">
+                        <h3>${school.nama}</h3>
+                        <span class="status-badge ${school.status.toLowerCase()}">${school.status}</span>
+                    </div>
+                    <div class="school-details">
+                        <p><strong>Kelurahan:</strong> ${school.kelurahan}</p>
+                        <p><strong>Alamat:</strong> ${school.alamat}</p>
+                        <p><strong>Jumlah Siswa:</strong> ${school.siswa} siswa</p>
+                        <p><strong>Jumlah Kelas:</strong> ${school.kelas} kelas</p>
+                    </div>
+                    <button class="detail-btn" onclick="showSchoolDetail('${school.nama}')">Lihat Detail</button>
+                `;
+                container.appendChild(schoolCard);
+            });
+        }
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            document.getElementById(`${tabName}-content`).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function resetFilter() {
+            document.getElementById('jenisSekolah').value = 'semua';
+            document.getElementById('kelurahan').value = 'semua';
+            document.getElementById('searchInput').value = '';
+            renderSchools(schoolsData.SD, 'sd-grid');
+            renderSchools(schoolsData.SMP, 'smp-grid');
+        }
+
+        function showSchoolDetail(schoolName) {
+            const encodedName = encodeURIComponent(schoolName);
+            window.location.href = `detail.html?nama=${encodedName}`;
+        }
+
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderSchools(schoolsData.SD, 'sd-grid');
+            renderSchools(schoolsData.SMP, 'smp-grid');
+
+            // Add filter functionality
+            document.getElementById('searchInput').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const jenisFilter = document.getElementById('jenisSekolah').value;
+                const kelurahanFilter = document.getElementById('kelurahan').value;
+
+                if (jenisFilter === 'semua' || jenisFilter === 'SD') {
+                    const filteredSD = schoolsData.SD.filter(school => {
+                        const matchesSearch = school.nama.toLowerCase().includes(searchTerm);
+                        const matchesKelurahan = kelurahanFilter === 'semua' || school.kelurahan === kelurahanFilter;
+                        return matchesSearch && matchesKelurahan;
+                    });
+                    renderSchools(filteredSD, 'sd-grid');
+                }
+
+                if (jenisFilter === 'semua' || jenisFilter === 'SMP') {
+                    const filteredSMP = schoolsData.SMP.filter(school => {
+                        const matchesSearch = school.nama.toLowerCase().includes(searchTerm);
+                        const matchesKelurahan = kelurahanFilter === 'semua' || school.kelurahan === kelurahanFilter;
+                        return matchesSearch && matchesKelurahan;
+                    });
+                    renderSchools(filteredSMP, 'smp-grid');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
